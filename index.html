@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>伊勢・相差 旅のしおり</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&family=Shippori+Mincho:wght@600;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f7f3ec;
+    --paper: #fffdf8;
+    --ink: #2d2a26;
+    --muted: #7a7166;
+    --line: #e4dccf;
+    --sea: #2f6f8f;
+    --sea-soft: #e3eff4;
+    --sun: #c8643b;
+    --sun-soft: #f8e6dc;
+    --accent: #b08a3e;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #1b1d20;
+      --paper: #24272b;
+      --ink: #ece7df;
+      --muted: #a39b90;
+      --line: #3a3e44;
+      --sea: #7cb6d2;
+      --sea-soft: #22343d;
+      --sun: #e79068;
+      --sun-soft: #3d2a22;
+      --accent: #d3b06a;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #1b1d20;
+    --paper: #24272b;
+    --ink: #ece7df;
+    --muted: #a39b90;
+    --line: #3a3e44;
+    --sea: #7cb6d2;
+    --sea-soft: #22343d;
+    --sun: #e79068;
+    --sun-soft: #3d2a22;
+    --accent: #d3b06a;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Zen Maru Gothic", "Hiragino Maru Gothic ProN", "Hiragino Sans", "Noto Sans JP", sans-serif;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 24px 16px 64px; }
+
+  /* 表紙 */
+  .cover {
+    background: linear-gradient(180deg, var(--sea-soft) 0%, var(--paper) 100%);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 36px 24px 28px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover .wave { position: absolute; left: 0; right: 0; bottom: 0; height: 40px; opacity: .5; }
+  .cover .kicker { color: var(--sea); letter-spacing: .3em; font-size: 13px; font-weight: 700; }
+  .cover h1 {
+    font-family: "Shippori Mincho", serif;
+    font-weight: 800;
+    font-size: clamp(30px, 8vw, 44px);
+    margin: 6px 0 4px;
+    letter-spacing: .08em;
+  }
+  .cover .sub { font-size: 15px; color: var(--muted); }
+  .facts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 10px;
+    margin-top: 22px;
+    text-align: left;
+    position: relative;
+  }
+  .fact {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 10px 14px;
+  }
+  .fact .label { font-size: 11px; color: var(--muted); letter-spacing: .1em; }
+  .fact .value { font-weight: 700; font-size: 15px; }
+  .fact a { color: var(--sea); text-decoration: none; }
+
+  /* セクション */
+  section { margin-top: 36px; }
+  h2 {
+    font-family: "Shippori Mincho", serif;
+    font-size: 22px;
+    margin: 0 0 14px;
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+  h2 .day {
+    font-family: "Zen Maru Gothic", sans-serif;
+    background: var(--sea);
+    color: var(--paper);
+    font-size: 12px;
+    padding: 2px 10px;
+    border-radius: 999px;
+    letter-spacing: .1em;
+  }
+  h2 small { font-family: "Zen Maru Gothic", sans-serif; font-size: 14px; color: var(--muted); font-weight: 500; }
+
+  /* タイムライン */
+  .timeline { list-style: none; margin: 0; padding: 0; position: relative; }
+  .timeline::before {
+    content: ""; position: absolute; left: 62px; top: 8px; bottom: 8px;
+    width: 2px; background: var(--line);
+  }
+  .timeline > li {
+    display: grid;
+    grid-template-columns: 54px 1fr;
+    gap: 22px;
+    padding: 8px 0;
+    position: relative;
+  }
+  .timeline > li::before {
+    content: ""; position: absolute; left: 57px; top: 16px;
+    width: 12px; height: 12px; border-radius: 50%;
+    background: var(--paper); border: 2px solid var(--sea);
+  }
+  .timeline > li.hi::before { background: var(--sun); border-color: var(--sun); }
+  .time { font-weight: 700; font-variant-numeric: tabular-nums; color: var(--sea); text-align: right; font-size: 15px; }
+  .time small { display: block; font-size: 10px; font-weight: 500; color: var(--muted); line-height: 1; }
+  .what { font-weight: 700; }
+  .what .tag {
+    display: inline-block; font-size: 11px; font-weight: 500;
+    padding: 0 8px; border-radius: 6px; margin-left: 6px;
+    background: var(--sea-soft); color: var(--sea); vertical-align: 2px;
+  }
+  .what .tag.sun { background: var(--sun-soft); color: var(--sun); }
+  .notes { margin: 2px 0 0; padding: 0; list-style: none; font-weight: 400; font-size: 14px; color: var(--muted); }
+  .notes li { display: block; padding: 0; }
+  .notes li::before { content: "・"; }
+
+  .eat {
+    display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px;
+  }
+  .eat span {
+    font-size: 13px; font-weight: 500;
+    background: var(--sun-soft); color: var(--sun);
+    border-radius: 999px; padding: 2px 10px;
+  }
+
+  /* カード */
+  .card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 18px 20px;
+  }
+
+  /* 予算 */
+  table { width: 100%; border-collapse: collapse; font-size: 15px; }
+  td { padding: 8px 0; border-bottom: 1px dashed var(--line); vertical-align: top; }
+  td.yen { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; padding-left: 12px; }
+  tr.total td { border-bottom: 0; border-top: 2px solid var(--ink); font-weight: 700; font-size: 17px; padding-top: 12px; }
+  tr.total td.yen { color: var(--sun); }
+  .per { font-size: 12px; color: var(--muted); margin: 0 0 6px; }
+
+  /* 持ち物 */
+  .check { list-style: none; margin: 0; padding: 0; }
+  .check li { padding: 6px 0; border-bottom: 1px dashed var(--line); }
+  .check li:last-child { border-bottom: 0; }
+  .check label { display: flex; gap: 10px; align-items: flex-start; cursor: pointer; }
+  .check input { width: 18px; height: 18px; margin-top: 4px; accent-color: var(--sea); flex: none; }
+  .check input:checked + span { text-decoration: line-through; color: var(--muted); }
+  .check small { color: var(--muted); }
+
+  .grid2 { display: grid; grid-template-columns: 1fr; gap: 16px; }
+  @media (min-width: 640px) { .grid2 { grid-template-columns: 1fr 1fr; } }
+
+  .alert {
+    background: var(--sun-soft);
+    border: 1px solid var(--sun);
+    color: var(--ink);
+    border-radius: 16px;
+    padding: 16px 20px;
+  }
+  .alert strong { color: var(--sun); font-size: 18px; }
+
+  footer { margin-top: 40px; text-align: center; color: var(--muted); font-size: 12px; }
+
+  /* 印刷用 */
+  @media print {
+    :root { --bg: #fff; --paper: #fff; }
+    body { font-size: 12px; }
+    .wrap { padding: 0; max-width: none; }
+    section { break-inside: avoid; margin-top: 20px; }
+    .cover { border-radius: 0; }
+    .check input { display: none; }
+    .check label::before { content: "□"; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="cover">
+    <div class="kicker">旅のしおり</div>
+    <h1>伊勢・相差</h1>
+    <div class="sub">1泊2日 ／ 2人旅</div>
+    <div class="facts">
+      <div class="fact">
+        <div class="label">日程</div>
+        <div class="value">10/18(日) 〜 10/19(月)</div>
+      </div>
+      <div class="fact">
+        <div class="label">宿（夕朝食付き）</div>
+        <div class="value">南鳥羽相差 網元 浜伝</div>
+      </div>
+      <div class="fact">
+        <div class="label">宿の電話</div>
+        <div class="value"><a href="tel:0599337373">0599-33-7373</a></div>
+      </div>
+      <div class="fact">
+        <div class="label">キャンセル無料</div>
+        <div class="value">10/12(月) 23:59まで</div>
+      </div>
+    </div>
+    <svg class="wave" viewBox="0 0 720 40" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0 20 Q 45 0 90 20 T 180 20 T 270 20 T 360 20 T 450 20 T 540 20 T 630 20 T 720 20 V40 H0 Z" fill="var(--sea)" opacity=".25"/>
+      <path d="M0 28 Q 45 12 90 28 T 180 28 T 270 28 T 360 28 T 450 28 T 540 28 T 630 28 T 720 28 V40 H0 Z" fill="var(--sea)" opacity=".35"/>
+    </svg>
+  </header>
+
+  <section>
+    <h2><span class="day">DAY 1</span>10/18(日)<small>お伊勢参りと相差へ</small></h2>
+    <div class="card">
+      <ul class="timeline">
+        <li>
+          <div class="time">7:30</div>
+          <div><div class="what">布施駅 出発<span class="tag">近鉄急行</span></div>
+            <ul class="notes"><li>名張・伊勢中川で乗り換え</li></ul></div>
+        </li>
+        <li>
+          <div class="time">10:30</div>
+          <div><div class="what">伊勢市駅 着</div>
+            <ul class="notes"><li>ロッカーに荷物を預ける</li></ul></div>
+        </li>
+        <li class="hi">
+          <div class="time">10:45</div>
+          <div><div class="what">外宮 参拝<span class="tag">駅から徒歩5分</span></div></div>
+        </li>
+        <li>
+          <div class="time">11:30</div>
+          <div><div class="what">バスで内宮へ<span class="tag">約20分</span></div></div>
+        </li>
+        <li class="hi">
+          <div class="time">11:50</div>
+          <div><div class="what">内宮 参拝</div>
+            <ul class="notes"><li>五十鈴川の御手洗場で手を清める</li></ul></div>
+        </li>
+        <li class="hi">
+          <div class="time">12:50</div>
+          <div><div class="what">おかげ横丁で食べ歩き</div>
+            <div class="eat">
+              <span>伊勢うどん</span><span>赤福餅</span><span>豚捨のコロッケ</span>
+              <span>松阪牛の串</span><span>海老せんべい</span><span>伊勢茶</span>
+            </div></div>
+        </li>
+        <li>
+          <div class="time">14:30</div>
+          <div><div class="what">バスと近鉄で鳥羽へ<span class="tag">約40分</span></div></div>
+        </li>
+        <li>
+          <div class="time">15:15</div>
+          <div><div class="what">鳥羽駅 着</div>
+            <ul class="notes">
+              <li>駅のファミマで飲み物・夜食を買う</li>
+              <li>鳥羽バスセンター（駅から徒歩3分）へ</li>
+            </ul></div>
+        </li>
+        <li>
+          <div class="time">15:30<small>頃</small></div>
+          <div><div class="what">かもめバス（国崎行き）に乗る</div>
+            <ul class="notes"><li>「相差（石神さん前）」まで約40分、600円</li></ul></div>
+        </li>
+        <li>
+          <div class="time">16:30</div>
+          <div><div class="what">浜伝 チェックイン</div></div>
+        </li>
+        <li class="hi">
+          <div class="time">17:00</div>
+          <div><div class="what">千鳥ヶ浜を散歩して夕日を見る</div></div>
+        </li>
+        <li class="hi">
+          <div class="time">18:00</div>
+          <div><div class="what">夕食<span class="tag sun">伊勢海老1尾付き</span></div>
+            <ul class="notes"><li>地魚コース</li></ul></div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="day">DAY 2</span>10/19(月)<small>相差の朝と鳥羽</small></h2>
+    <div class="card">
+      <ul class="timeline">
+        <li>
+          <div class="time">7:00</div>
+          <div><div class="what">朝の路地を散歩</div></div>
+        </li>
+        <li>
+          <div class="time">7:30</div>
+          <div><div class="what">朝食</div></div>
+        </li>
+        <li class="hi">
+          <div class="time">9:00</div>
+          <div><div class="what">石神さん 参拝</div>
+            <ul class="notes"><li>女性の願いが1つ叶う</li></ul></div>
+        </li>
+        <li>
+          <div class="time">9:30</div>
+          <div><div class="what">相差海女文化資料館<span class="tag">無料</span></div></div>
+        </li>
+        <li>
+          <div class="time">10:00</div>
+          <div><div class="what">チェックアウト</div>
+            <ul class="notes"><li>時間があれば立石さんまで海沿いを歩く</li></ul></div>
+        </li>
+        <li>
+          <div class="time">11:00<small>頃</small></div>
+          <div><div class="what">かもめバスで鳥羽へ</div></div>
+        </li>
+        <li class="hi">
+          <div class="time">12:00</div>
+          <div><div class="what">鳥羽港まわりを散歩してお昼</div></div>
+        </li>
+        <li>
+          <div class="time">14:00</div>
+          <div><div class="what">鳥羽駅から近鉄で帰る</div></div>
+        </li>
+        <li>
+          <div class="time">17:00<small>頃</small></div>
+          <div><div class="what">布施駅 着</div></div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="grid2">
+    <div>
+      <h2>予算</h2>
+      <div class="card">
+        <p class="per">1人あたり</p>
+        <table>
+          <tr><td>電車（布施→伊勢市）</td><td class="yen">約2,150円</td></tr>
+          <tr><td>バス・近鉄（外宮→内宮→鳥羽）</td><td class="yen">約1,200円</td></tr>
+          <tr><td>かもめバス 往復</td><td class="yen">1,200円</td></tr>
+          <tr><td>宿（夕朝食付き）</td><td class="yen">11,000円</td></tr>
+          <tr><td>おかげ横丁の食べ歩き</td><td class="yen">約2,000円</td></tr>
+          <tr><td>2日目のお昼</td><td class="yen">約1,200円</td></tr>
+          <tr><td>電車（鳥羽→布施）</td><td class="yen">約2,300円</td></tr>
+          <tr><td>飲み物など</td><td class="yen">約500円</td></tr>
+          <tr class="total"><td>合計</td><td class="yen">約21,500円</td></tr>
+        </table>
+      </div>
+    </div>
+    <div>
+      <h2>持ち物</h2>
+      <div class="card">
+        <ul class="check">
+          <li><label><input type="checkbox"><span>歩きやすい靴</span></label></li>
+          <li><label><input type="checkbox"><span>薄手の上着 <small>（海辺は風が冷たい）</small></span></label></li>
+          <li><label><input type="checkbox"><span>交通系ICカード <small>（かもめバスで使えるか事前に確認）</small></span></label></li>
+          <li><label><input type="checkbox"><span>小銭 <small>（バス代）</small></span></label></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="alert">
+      <div>キャンセル無料期限</div>
+      <strong>10/12(月) 23:59まで</strong>
+    </div>
+  </section>
+
+  <footer>いってらっしゃい！ 良い旅を。</footer>
+</div>
+</body>
+</html>
